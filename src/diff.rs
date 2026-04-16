@@ -75,12 +75,11 @@ impl PackageListDiff {
         };
 
         let name_width = self.longest_name + 2;
-        let package_width = (all
+        let package_width = all
             .iter()
             .map(|pkg| strip_ansi_escapes::strip(format!("{}", pkg.base_package)).len())
             .max()
-            .expect("At least one package exists"))
-        .min(120);
+            .map(|width| width.min(120));
 
         for package in &all {
             let name = &package.name;
@@ -88,6 +87,7 @@ impl PackageListDiff {
             let delta = &package.size_delta;
             let versions = format!("{package}");
             let visual_len = strip_ansi_escapes::strip(&versions).len();
+            let package_width = package_width.expect("At least one package exists");
             let padding = " ".repeat(package_width.saturating_sub(visual_len));
             writeln!(f, "{name:name_width$}{versions}{padding}  {delta}")?;
         }
