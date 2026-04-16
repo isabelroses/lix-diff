@@ -4,6 +4,7 @@ use clap::Parser;
 use color_eyre::Result;
 use diff::PackageListDiff;
 use nu_ansi_term::{Color, Style};
+use shellexpand::path::tilde;
 use terminal_light::luma;
 
 mod color;
@@ -53,14 +54,14 @@ fn main() -> Result<()> {
     // Initialize color configuration
     color::init(args.no_color);
 
-    let before = args.before;
-    let after = args.after;
-    let lix_bin = args.lix_bin;
+    let before = tilde(&args.before);
+    let after = tilde(&args.after);
+    let lix_bin = args.lix_bin.as_deref().map(tilde);
 
     let mut lix_exe = None;
     if let Some(lix_bin) = lix_bin {
         lix_exe = if lix_bin.is_dir() {
-            Some(lix_bin.join("nix"))
+            Some(lix_bin.join("nix").into())
         } else {
             Some(lix_bin)
         }
