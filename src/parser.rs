@@ -1,6 +1,6 @@
 use color_eyre::Result;
-use serde::de::Deserializer;
 use serde::Deserialize;
+use serde::de::Deserializer;
 use std::{
     borrow::Cow,
     collections::BTreeMap,

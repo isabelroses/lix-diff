@@ -1,4 +1,4 @@
-use humansize::{format_size, DECIMAL};
+use humansize::{DECIMAL, format_size};
 use std::{cmp::Ordering, fmt::Display};
 
 use super::{
