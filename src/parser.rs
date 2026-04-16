@@ -1,12 +1,7 @@
 use color_eyre::Result;
 use serde::Deserialize;
 use serde::de::Deserializer;
-use std::{
-    borrow::Cow,
-    collections::BTreeMap,
-    path::{Path, PathBuf},
-    process::Command,
-};
+use std::{borrow::Cow, collections::BTreeMap, path::Path, process::Command};
 
 #[derive(Deserialize, Debug)]
 pub struct DiffRoot {
@@ -46,12 +41,12 @@ where
 }
 
 impl DiffRoot {
-    pub fn new(lix_path: Option<PathBuf>, before: &Path, after: &Path) -> Result<DiffRoot> {
+    pub fn new(lix_path: Option<&Path>, before: &Path, after: &Path) -> Result<DiffRoot> {
         let lix_exe;
         if let Some(lix_path) = lix_path {
             lix_exe = lix_path;
         } else {
-            lix_exe = "nix".into();
+            lix_exe = Path::new("nix");
         }
 
         let raw_diff = Command::new(lix_exe)

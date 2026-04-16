@@ -76,7 +76,7 @@ fn main() -> Result<()> {
         std::process::exit(1);
     }
 
-    let packages_diff = DiffRoot::new(lix_exe, &before, &after)?;
+    let packages_diff = DiffRoot::new(lix_exe.as_deref(), &before, &after)?;
     let mut packages: PackageListDiff = PackageListDiff::new();
     packages.by_size = args.size;
     packages.from_diff_root(packages_diff);
