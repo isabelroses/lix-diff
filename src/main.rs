@@ -34,7 +34,7 @@ struct Args {
     #[arg(short, long)]
     size: bool,
 
-    /// disable colored output (also respects NO_COLOR env var and CI environments)
+    /// disable colored output (also respects `NO_COLOR` env var and CI environments)
     #[arg(long)]
     no_color: bool,
 
@@ -104,7 +104,7 @@ fn main() -> Result<()> {
     println!("{packages}");
 
     if args.return_code {
-        std::process::exit(if packages.is_empty() { 1 } else { 0 });
+        std::process::exit(packages.is_empty().into());
     }
 
     Ok(())
