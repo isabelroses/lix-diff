@@ -21,7 +21,7 @@ nix profile install nixpkgs#lix-diff
 Or get it from the flake:
 
 ```bash
-nix profile install github:tgirlcloud/lix-diff
+nix profile install github:isabelroses/lix-diff
 ```
 
 ## Usage
